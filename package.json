@@ -6,7 +6,7 @@
   "main": "src/api.js",
   "scripts": {
     "start": "node start.js",
-    "dev": "NODE_ENV=development nodemon start.js"
+    "dev": "cross-env NODE_ENV=development nodemon start.js"
   },
   "dependencies": {
     "axios": "^1.9.0",
@@ -17,6 +17,7 @@
     "zod": "^3.25.56"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "ngrok": "^5.0.0-beta.2",
     "nodemon": "^3.1.10"
   },

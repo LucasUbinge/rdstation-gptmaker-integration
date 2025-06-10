@@ -1,4 +1,4 @@
-import externalApi from "./axios.js";
+import externalApi from "../config/axios.js";
 
 const RD_CRM_WEBHOOKS_PATH = "/api/v1/webhooks";
 
