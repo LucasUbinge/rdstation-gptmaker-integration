@@ -1,46 +1,43 @@
 import swaggerJSDoc from "swagger-jsdoc";
 
+// A URL é obtida da variável de ambiente, que será definida pelo start.js ou pelo Render.
+const serverUrl = process.env.SERVER_URL || "http://localhost:3000";
+
 const options = {
   definition: {
     openapi: "3.0.0",
     info: {
       title: "API de Integração com RD Station CRM",
       version: "1.0.0",
-      description: "API para criar webhooks no RD Station CRM.",
+      description: "API para criar e gerenciar webhooks no RD Station CRM e receber notificações de contatos.",
     },
     servers: [
       {
-        url: process.env.SWAGGER_SERVER_URL || "http://localhost:3000",
-        description: "Servidor de Desenvolvimento",
+        url: serverUrl,
+        description: "Servidor Atual",
       },
     ],
     components: {
       schemas: {
-        // Schema ATUALIZADO para o corpo da requisição de criar webhook
         CreateWebhookPayload: {
           type: "object",
           properties: {
             event_type: {
               type: "string",
-              description: "O tipo de evento que dispara o webhook.",
               example: "crm_contact_created",
             },
             http_method: {
               type: "string",
-              description: "O método HTTP para a notificação.",
               example: "POST",
             },
             url: {
               type: "string",
               format: "uri",
-              description: "A URL que receberá a notificação.",
-              example:
-                "https://sua-url-publica.ngrok.io/api/v1/contacts/receiver",
+              example: `${serverUrl}/api/v1/contacts/receiver`,
             },
           },
           required: ["event_type", "http_method", "url"],
         },
-        // O schema de resposta pode ser simplificado ou mantido
         Webhook: {
           type: "object",
           properties: {
@@ -53,7 +50,7 @@ const options = {
       },
     },
   },
-  apis: ["./src/routes/*.js"],
+  apis: ["./src/routes/*.js"], // Caminho para os arquivos de rotas com anotações Swagger
 };
 
 const swaggerSpec = swaggerJSDoc(options);

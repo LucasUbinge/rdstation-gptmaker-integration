@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: rd-crm-api
+    env: node
+    plan: free # Ou o plano que você preferir
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SERVER_URL
+        fromService:
+          type: web
+          name: rd-crm-api
+          property: url
+      - key: API_BASE_URL # Ex: https://api.rd.services
+        sync: false
+      - key: API_TOKEN # Seu token do RD Station
+        sync: false
+      - key: GPTMAKER_API_KEY # Sua chave da GPTMaker
+        sync: false
+      - key: GPTMAKER_CHANNEL_ID # Seu ID de canal da GPTMaker
+        sync: false
