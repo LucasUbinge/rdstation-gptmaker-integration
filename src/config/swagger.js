@@ -35,7 +35,7 @@ const options = {
               format: "uri",
               description: "A URL que receberá a notificação.",
               example:
-                "https://sua-url-publica.ngrok.io/api/v1/contacts/receiver",
+                "https://rdstation-gptmaker-integration.vercel.app/api/v1/contacts/receiver",
             },
           },
           required: ["event_type", "http_method", "url"],
