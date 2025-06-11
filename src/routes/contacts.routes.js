@@ -14,7 +14,7 @@ const router = Router();
 
 /**
  * @swagger
- * /contacts/receiver:
+ * /api/v1/contacts/receiver:
  *   post:
  *     summary: Endpoint receptor para webhooks de novos contatos
  *     tags: [Contact Receiver]
@@ -27,10 +27,14 @@ const router = Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/NewContact'
+ *             $ref: '#/components/schemas/CreateContact'
  *     responses:
  *       200:
  *         description: Notificação recebida e processada com sucesso.
+ *         content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Contact'
  *       400:
  *         description: Erro de validação nos dados enviados.
  *       500:
