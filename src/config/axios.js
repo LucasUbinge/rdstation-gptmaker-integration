@@ -1,8 +1,8 @@
 import axios from "axios";
-import "dotenv/config";
+import { env } from "./env.js";
 
 const externalApi = axios.create({
-  baseURL: process.env.API_BASE_URL,
+  baseURL: env.API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -12,7 +12,7 @@ const externalApi = axios.create({
 externalApi.interceptors.request.use((config) => {
   config.params = {
     ...config.params,
-    token: process.env.API_TOKEN,
+    token: env.API_TOKEN,
   };
   return config;
 });

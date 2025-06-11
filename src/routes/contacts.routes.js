@@ -1,5 +1,7 @@
 import { Router } from "express";
 import * as contactController from "../controllers/contact.controller.js";
+import { validate } from "../middlewares/validation.middleware.js";
+import { newContactSchema } from "../schemas/contact.schema.js";
 
 const router = Router();
 
@@ -25,19 +27,19 @@ const router = Router();
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             example:
- *               contacts:
- *                 - id: "6664e43f5697d2000e39535c"
- *                   name: "João Teste"
- *                   emails:
- *                     - email: "joao.teste@example.com"
+ *             $ref: '#/components/schemas/NewContact'
  *     responses:
  *       200:
  *         description: Notificação recebida e processada com sucesso.
+ *       400:
+ *         description: Erro de validação nos dados enviados.
  *       500:
  *         description: Erro interno ao processar a notificação.
  */
-router.post("/receiver", contactController.receiveNewContact);
+router.post(
+  "/receiver",
+  validate(newContactSchema),
+  contactController.receiveNewContact
+);
 
 export default router;

@@ -1,13 +1,18 @@
+import ApiServiceError from "../errors/ApiServiceError.js";
+
 export const errorHandler = (err, req, res, next) => {
-  console.error(err.stack); // Loga o erro completo para debug interno
+  // Loga o erro completo para debug interno, independentemente do tipo
+  console.error(err);
 
-  const statusCode = err.statusCode || 500;
+  if (err instanceof ApiServiceError) {
+    // Se for um erro conhecido do nosso serviço, usamos o status code dele
+    return res.status(err.statusCode || 500).json({
+      error: err.message,
+    });
+  }
 
-  // Se for um erro do servidor (não intencional), envie uma mensagem genérica
-  const message =
-    statusCode === 500 ? "Ocorreu um erro interno no servidor." : err.message;
-
-  res.status(statusCode).json({
-    error: message,
+  // Para qualquer outro tipo de erro (inesperado), enviamos uma mensagem genérica
+  return res.status(500).json({
+    error: "Ocorreu um erro interno inesperado no servidor.",
   });
 };

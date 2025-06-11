@@ -3,11 +3,12 @@ import express from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./config/swagger.js";
 import mainRouter from "./routes/index.routes.js";
+import { env } from "./config/env.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-const SERVER_URL = process.env.SERVER_URL || `http://localhost:${PORT}`;
+const PORT = env.PORT || 3000;
+const SERVER_URL = env.SERVER_URL || `http://localhost:${PORT}`;
 
 // Middlewares
 app.use(express.json());

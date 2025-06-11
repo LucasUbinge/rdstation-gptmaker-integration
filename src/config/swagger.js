@@ -1,4 +1,5 @@
 import swaggerJSDoc from "swagger-jsdoc";
+import { property } from "zod/v4";
 
 // A URL é obtida da variável de ambiente, que será definida pelo start.js ou pelo Render.
 const serverUrl = process.env.SERVER_URL || "http://localhost:3000";
@@ -9,7 +10,8 @@ const options = {
     info: {
       title: "API de Integração com RD Station CRM",
       version: "1.0.0",
-      description: "API para criar e gerenciar webhooks no RD Station CRM e receber notificações de contatos.",
+      description:
+        "API para criar e gerenciar webhooks no RD Station CRM e receber notificações de contatos.",
     },
     servers: [
       {
@@ -19,7 +21,7 @@ const options = {
     ],
     components: {
       schemas: {
-        CreateWebhookPayload: {
+        CreateWebhook: {
           type: "object",
           properties: {
             event_type: {
@@ -45,6 +47,27 @@ const options = {
             event_type: { type: "string" },
             url: { type: "string" },
             http_method: { type: "string" },
+          },
+        },
+        CreateContact: {
+          type: "object",
+          properties: {
+            phone: {
+              type: "string",
+              example: "44999999999",
+            },
+            message: {
+              type: "string",
+              example: "Mensagem de boas-vindas.",
+            },
+          },
+          required: ["message", "phone"],
+        },
+        Contact: {
+          type: "object",
+          properties: {
+            phone: { type: "string" },
+            message: { type: "string" },
           },
         },
       },

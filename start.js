@@ -26,7 +26,7 @@ const startDevEnvironment = async () => {
     });
 
     console.log(`✅ NGROK ativo: ${url}`);
-    
+
     // Define a URL do servidor para que o Swagger e outras partes da app a utilizem
     process.env.SERVER_URL = url;
 

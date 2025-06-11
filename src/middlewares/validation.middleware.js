@@ -1,4 +1,3 @@
-// Middleware genérico para validar requisições com Zod
 export const validate = (schema) => (req, res, next) => {
   try {
     schema.parse({
@@ -10,7 +9,8 @@ export const validate = (schema) => (req, res, next) => {
   } catch (error) {
     return res.status(400).json({
       error: "Dados inválidos.",
-      details: error.errors,
+      // Usar o método flatten() do Zod para uma resposta de erro mais estruturada
+      details: error.flatten(),
     });
   }
 };

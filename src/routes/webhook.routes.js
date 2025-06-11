@@ -14,7 +14,7 @@ const router = Router();
 
 /**
  * @swagger
- * /webhooks:
+ * /api/v1/webhooks:
  *   post:
  *     summary: Cria um webhook para novos contatos
  *     tags: [Webhooks]
@@ -25,7 +25,7 @@ const router = Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/CreateWebhookPayload'
+ *             $ref: '#/components/schemas/CreateWebhook'
  *     responses:
  *       201:
  *         description: Webhook criado com sucesso. Retorna o objeto do webhook criado.
@@ -46,7 +46,7 @@ router.post(
 
 /**
  * @swagger
- * /webhooks:
+ * /api/v1/webhooks:
  *   get:
  *     summary: Lista todos os webhooks do RD Station CRM
  *     tags: [Webhooks]
@@ -58,7 +58,7 @@ router.get("/", webhookController.getAllWebhooks);
 
 /**
  * @swagger
- * /webhooks/{id}:
+ * /api/v1/webhooks/{id}:
  *   delete:
  *     summary: Deleta um webhook
  *     tags:

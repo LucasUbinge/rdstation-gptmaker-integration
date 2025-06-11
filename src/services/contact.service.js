@@ -1,4 +1,5 @@
 import gptmakerApi from "../config/gptmakerApi.js";
+import { templates } from "../config/templates.js";
 
 /**
  * Processa os dados de um novo contato recebido pelo webhook.
@@ -20,7 +21,7 @@ export const processNewContact = async (contactData) => {
   const name = contact.name;
   const phone = contact.phones?.[0]?.phone;
 
-  const mensagemPronta = `Olá, ${name}! Bem-vindo à nossa plataforma. Estamos felizes em ter você conosco.`;
+  const mensagemPronta = templates.welcome(name);
 
   const bodyGPTMaker = {
     phone: phone,
