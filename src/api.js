@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./config/swagger.js";
 import mainRouter from "./routes/index.routes.js";
@@ -11,6 +12,7 @@ const PORT = env.PORT || 3000;
 const SERVER_URL = env.SERVER_URL || `http://localhost:${PORT}`;
 
 // Middlewares
+app.use(cors());
 app.use(express.json());
 
 // Rotas da API com prefixo /api/v1

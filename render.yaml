@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: rd-crm-api
+    name: rd-gptmaker-integration
     env: node
     plan: free # Ou o plano que você preferir
     buildCommand: "npm install"
