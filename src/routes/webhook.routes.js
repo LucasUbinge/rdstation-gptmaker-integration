@@ -81,6 +81,12 @@ router.delete("/:id", webhookController.deleteWebhook);
 /**
  * @swagger
  * /api/v1/webhooks/receive
+ *   post:
+ *     summary: Notifica se webhooks foi ativo
+ *     tags: [Webhooks]
+ *     responses:
+ *       200:
+ *         description: Lista de webhooks obtida com sucesso.
  */
 router.post("/receive", webhookController.receiveWebhookNotification);
 
