@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { exec } from "child_process";
-import ngrok from "ngrok";
+const ngrok = await import("ngrok");
 
 const PORT = process.env.PORT || 3000;
 const isProduction = process.env.NODE_ENV === "production";
@@ -20,7 +20,7 @@ const startServer = () => {
  */
 const startDevEnvironment = async () => {
   try {
-    const url = await ngrok.connect({
+    const url = await ngrok.default.connect({
       addr: PORT,
       authtoken: process.env.NGROK_AUTH_TOKEN,
     });

@@ -31,3 +31,31 @@ export const deleteWebhook = async (req, res, next) => {
     next(error);
   }
 };
+
+export const receiveWebhookNotification = async (req, res, next) => {
+  try {
+    const { event_type, data } = req.body;
+
+    if (event_type === "crm_contact_created" && data) {
+      const contact = data;
+      const phone = contact.mobile_phone || contact.phone;
+      const name = contact.name || "Novo contato";
+
+      if (phone) {
+        const welcomeMessage = `Olá ${name}! 👋 Seja bem-vindo(a)! Obrigado por se cadastrar conosco. Em breve entraremos em contato para te ajudar com o que precisar.`;
+
+        await messageService.sendGptMakerMessage({
+          phone: phone,
+          message: welcomeMessage,
+        });
+      }
+    }
+
+    res.status(200).json({
+      status: "success",
+      message: "Webhook processado com sucesso",
+    });
+  } catch (error) {
+    next(error);
+  }
+};

@@ -78,4 +78,6 @@ router.get("/", webhookController.getAllWebhooks);
  */
 router.delete("/:id", webhookController.deleteWebhook);
 
+router.post("/receive", webhookController.receiveWebhookNotification);
+
 export default router;
