@@ -78,6 +78,10 @@ router.get("/", webhookController.getAllWebhooks);
  */
 router.delete("/:id", webhookController.deleteWebhook);
 
+/**
+ * @swagger
+ * /api/v1/webhooks/receive
+ */
 router.post("/receive", webhookController.receiveWebhookNotification);
 
 export default router;
