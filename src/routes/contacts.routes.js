@@ -40,10 +40,6 @@ const router = Router();
  *       500:
  *         description: Erro interno ao processar a notificação.
  */
-router.post(
-  "/receiver",
-  validate(newContactSchema),
-  contactController.receiveNewContact
-);
+router.post("/receiver", contactController.receiveNewContact);
 
 export default router;
